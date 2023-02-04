@@ -2,7 +2,7 @@
 
 run 
 ```
-mvn exec:java
+mvn compile exec:java
 ```
 
 build
