@@ -13,7 +13,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <tinylog.version>2.6.0-M2</tinylog.version>
+        <tinylog.version>2.6.0</tinylog.version>
     </properties>
 
     <dependencies>
@@ -53,12 +53,12 @@
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.10</version>
+            <version>2.10.1</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.14.1</version>
+            <version>2.14.2</version>
         </dependency>
         <dependency>
             <groupId>com.google.inject</groupId>
@@ -68,7 +68,7 @@
         <dependency>
             <groupId>org.jooq</groupId>
             <artifactId>jooq</artifactId>
-            <version>3.17.6</version>
+            <version>3.17.7</version>
         </dependency>
         <dependency>
             <groupId>org.hsqldb</groupId>
@@ -85,7 +85,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.9.1</version>
+            <version>5.9.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -112,6 +112,7 @@
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.4.1</version>
                 <configuration>
+                    <finalName>${project.name}</finalName>
                     <filters>
                         <filter>
                             <artifact>*:*</artifact>
@@ -134,9 +135,27 @@
                                 <exclude>META-INF/maven/org.slf4j/slf4j-api/pom.*</exclude>
                             </excludes>
                         </filter>
+
+                        <filter>
+                            <artifact>org.eclipse.jetty:jetty-annotations</artifact>
+                            <excludes><exclude>META-INF/services/org.eclipse.jetty.webapp.Configuration</exclude></excludes>
+                        </filter>
+                        <filter>
+                            <artifact>org.eclipse.jetty:jetty-plus</artifact>
+                            <excludes><exclude>META-INF/services/org.eclipse.jetty.webapp.Configuration</exclude></excludes>
+                        </filter>
+                        <filter>
+                            <artifact>org.eclipse.jetty.websocket:websocket-jetty-server</artifact>
+                            <excludes><exclude>META-INF/services/org.eclipse.jetty.webapp.Configuration</exclude></excludes>
+                        </filter>
                     </filters>
 
                     <transformers>
+                        <transformer
+                                implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                            <mainClass>io.oreto.gungnir.launch.GungnirLaunch</mainClass>
+                        </transformer>
+
                         <transformer implementation="org.apache.maven.plugins.shade.resource.properties.PropertiesTransformer">
                             <resource>org/eclipse/jetty/http/encoding.properties</resource>
                             <ordinalKey>ordinal</ordinalKey>
