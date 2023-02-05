@@ -20,7 +20,7 @@
         <dependency>
             <groupId>io.github.ross-oreto.gungnir</groupId>
             <artifactId>gungnir</artifactId>
-            <version>1.0</version>
+            <version>1.0.0</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
