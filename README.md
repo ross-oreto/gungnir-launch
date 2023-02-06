@@ -24,10 +24,10 @@ java -jar -Dgungnir.profiles=local target\gungnir-launch.jar
 ```
 
 ### application properties
-Load the config files in this order of priority: (given gungnir.profiles = ['dev'])
+Config files are loaded in this order of priority: (given gungnir.profiles = ['dev'])
   1. System properties
   2. application-dev.conf (would just be application.conf when profiles are empty)
-  3. reference.conf
+  3. reference.conf (comes from gungnir jar classpath)
 
 specify a different config source -Dconfig.file=path/to/config-file
 ```
